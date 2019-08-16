@@ -1,6 +1,7 @@
 import React from "react";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 
 const UserForm = ({ errors }) => {
   return (
@@ -48,7 +49,10 @@ const FormikForm = withFormik({
     terms: Yup.boolean().oneOf([true], "terms of service must be checked")
   }),
   handleSubmit(values) {
-    console.log(values);
+    axios
+      .post("https://reqres.in/api/users", values)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
   }
 })(UserForm);
 
