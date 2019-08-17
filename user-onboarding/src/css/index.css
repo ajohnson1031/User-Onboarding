@@ -1,0 +1,113 @@
+body,
+html {
+  width: 100vw;
+  height: 100vh;
+}
+body .App,
+html .App,
+body #root,
+html #root {
+  width: inherit;
+  height: inherit;
+  margin: 0 !important;
+}
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #00ffbf;
+  line-height: 100%;
+}
+.main-header img {
+  height: 50px;
+}
+.main-header span {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.ui.container {
+  margin: 0 !important;
+  display: flex;
+  width: 100%;
+}
+.main-container {
+  width: inherit;
+  height: calc(100% - (20px + 2rem));
+  display: flex;
+}
+.main-container .form-holder {
+  width: 375px;
+  height: 100%;
+  background-color: red;
+  box-sizing: border-box;
+  padding: 30px;
+}
+.main-container .form-holder form {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  background-color: white;
+  border-radius: 10px;
+}
+.main-container .form-holder form::before {
+  content: "Account Creation Form";
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.main-container .form-holder form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  outline: none;
+}
+.main-container .form-holder form label {
+  font-weight: bold;
+  display: flex;
+  margin: 0;
+  justify-content: flex-end;
+}
+.main-container .form-holder form label span {
+  margin-right: 15px;
+}
+.main-container .form-holder form label input {
+  margin-top: 5px;
+}
+.main-container .form-holder form select {
+  border: 10px solid transparent;
+  background-color: #007759;
+  margin-bottom: 10px;
+  color: white;
+  font-weight: bold;
+  outline: none;
+}
+.main-container .form-holder form button {
+  padding: 10px;
+  background-color: dodgerblue;
+  border-radius: 4px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  margin-top: 10px;
+  outline: none;
+}
+.main-container .form-holder form .errors {
+  width: 100%;
+  padding: 0 15px;
+  border: 1px solid #ff8e8e;
+  background-color: #ffdfdf;
+  color: #ff5d5d;
+  font-weight: bold;
+  margin-top: 15px;
+  border-radius: 4px;
+}
+.main-container .results-holder {
+  width: calc(100% - 375px);
+  height: 100%;
+  padding: 30px;
+  background-color: purple;
+  box-sizing: border-box;
+  display: flex;
+}
