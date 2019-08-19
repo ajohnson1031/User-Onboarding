@@ -8,17 +8,24 @@ import Characters from "../Characters";
 
 const UserForm = ({ errors, status, values, userCount }) => {
   const [users, setUsers] = useState([]);
-  const [char, setChar] = useState([]);
+  const [char, setChar] = useState("");
 
   useEffect(() => {
     status && setUsers([...users, status]);
     userCount[1](userCount[0]++);
   }, [status, users, userCount]);
 
-  useEffect(() => {
-    status &&
-      setChar(Characters.filter(c => c.personality === values.personality));
-  }, [status, values.personality]);
+  const handleBlur = e => {
+    setChar(
+      Characters[
+        Math.floor(
+          Math.random() *
+            Characters.filter(c => c.personality === values.personality).length
+        )
+      ]
+    );
+    return char;
+  };
 
   return (
     <Container className="main-container">
@@ -27,7 +34,11 @@ const UserForm = ({ errors, status, values, userCount }) => {
           <Field type="text" name="name" placeholder="Name" />
           <Field type="text" name="email" placeholder="E-mail" />
           <Field type="password" name="password" placeholder="Password" />
-          <Field component="select" name="personality">
+          <Field
+            component="select"
+            name="personality"
+            onBlur={e => handleBlur(e)}
+          >
             <option value="">Select your personality...</option>
             <option value="sarcastic">Sarcastic</option>
             <option value="heroic">Heroic</option>
@@ -39,6 +50,7 @@ const UserForm = ({ errors, status, values, userCount }) => {
             <Field type="checkbox" name="terms" checked={values.terms} />
             <div className="box" />
           </label>
+          <Field type="hidden" value={char && char.img} name="img" />
           <Field component="button" type="submit" name="submitBtn">
             Submit
           </Field>
@@ -57,8 +69,17 @@ const UserForm = ({ errors, status, values, userCount }) => {
       <div className="results-holder">
         {users.map((user, i) => (
           <Card key={i}>
-            <Image src={char[Math.floor(Math.random() * char.length)].img} />
-            <h2>{user.name}</h2>
+            <Image src={user.img} />
+            <Card.Content>
+              <Card.Header>{user.name}</Card.Header>
+              <Card.Meta>
+                <span>
+                  Personality:{" "}
+                  {user.personality[0].toUpperCase() +
+                    user.personality.substr(1)}{" "}
+                </span>
+              </Card.Meta>
+            </Card.Content>
           </Card>
         ))}
       </div>
@@ -67,13 +88,14 @@ const UserForm = ({ errors, status, values, userCount }) => {
 };
 
 const FormikForm = withFormik({
-  mapPropsToValues({ name, email, password, terms, personality }) {
+  mapPropsToValues({ name, email, password, terms, personality, img }) {
     return {
       name: name || "",
       email: email || "",
       password: password || "",
       terms: terms || false,
-      personality: personality || ""
+      personality: personality || "",
+      img: img
     };
   },
   validateOnBlur: false,
@@ -95,6 +117,8 @@ const FormikForm = withFormik({
       : axios
           .post("https://reqres.in/api/users", values)
           .then(res => {
+            // console.log(res);
+            console.log(values);
             setStatus(res.data);
             resetForm();
           })

@@ -2,12 +2,22 @@ body,
 html {
   width: 100vw;
   height: 100vh;
+  background-image: url("https://wallpapercave.com/wp/i98vXju.jpg");
+  background-size: cover;
 
   .App,
   #root {
     width: inherit;
     height: inherit;
     margin: 0 !important;
+  }
+
+  video#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
   }
 }
 
@@ -44,7 +54,7 @@ html {
   .form-holder {
     width: 375px;
     height: 100%;
-    background-color: red;
+    background-color: transparent;
     box-sizing: border-box;
     padding: 30px;
 
@@ -121,8 +131,14 @@ html {
     width: calc(100% - 375px);
     height: 100%;
     padding: 30px;
-    background-color: purple;
     box-sizing: border-box;
     display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .ui.card {
+      height: fit-content;
+      margin-top: 0;
+    }
   }
 }

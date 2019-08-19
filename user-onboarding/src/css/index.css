@@ -2,6 +2,8 @@ body,
 html {
   width: 100vw;
   height: 100vh;
+  background-image: url("https://wallpapercave.com/wp/i98vXju.jpg");
+  background-size: cover;
 }
 body .App,
 html .App,
@@ -10,6 +12,14 @@ html #root {
   width: inherit;
   height: inherit;
   margin: 0 !important;
+}
+body video#myVideo,
+html video#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
 }
 .main-header {
   display: flex;
@@ -40,7 +50,7 @@ html #root {
 .main-container .form-holder {
   width: 375px;
   height: 100%;
-  background-color: red;
+  background-color: transparent;
   box-sizing: border-box;
   padding: 30px;
 }
@@ -107,7 +117,12 @@ html #root {
   width: calc(100% - 375px);
   height: 100%;
   padding: 30px;
-  background-color: purple;
   box-sizing: border-box;
   display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.main-container .results-holder .ui.card {
+  height: fit-content;
+  margin-top: 0;
 }
