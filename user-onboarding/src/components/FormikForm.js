@@ -6,7 +6,14 @@ import axios from "axios";
 import "semantic-ui-css/semantic.min.css";
 import Characters from "../Characters";
 
-const UserForm = ({ errors, status, values, userCount }) => {
+const UserForm = ({
+  errors,
+  status,
+  values,
+  userCount,
+  setFieldValue,
+  isSubmitting
+}) => {
   const [users, setUsers] = useState([]);
   const [char, setChar] = useState("");
 
@@ -16,15 +23,7 @@ const UserForm = ({ errors, status, values, userCount }) => {
   }, [status, users, userCount]);
 
   const handleBlur = e => {
-    setChar(
-      Characters[
-        Math.floor(
-          Math.random() *
-            Characters.filter(c => c.personality === values.personality).length
-        )
-      ]
-    );
-    return char;
+    setChar(Characters.filter(c => c.personality === values.personality));
   };
 
   return (
@@ -50,8 +49,19 @@ const UserForm = ({ errors, status, values, userCount }) => {
             <Field type="checkbox" name="terms" checked={values.terms} />
             <div className="box" />
           </label>
-          <Field type="hidden" value={char && char.img} name="img" />
-          <Field component="button" type="submit" name="submitBtn">
+          <Field type="hidden" value name="img" />
+          <Field
+            component="button"
+            type="submit"
+            name="submitBtn"
+            onClick={() =>
+              setFieldValue(
+                "img",
+                char[Math.floor(Math.random() * char.length)].img
+              )
+            }
+            disabled={isSubmitting}
+          >
             Submit
           </Field>
           {errors && Object.keys(errors).length > 0 && (
