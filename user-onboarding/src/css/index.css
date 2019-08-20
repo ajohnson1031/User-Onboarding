@@ -126,3 +126,11 @@ html video#myVideo {
   height: fit-content;
   margin-top: 0;
 }
+.main-container .results-holder .ui.card .powers-header {
+  padding: 5px 10px;
+  background-color: lightblue;
+}
+.main-container .results-holder .ui.card .powers-list {
+  list-style: square;
+  padding-left: 25px;
+}
